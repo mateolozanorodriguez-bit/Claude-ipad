@@ -31,10 +31,10 @@ Stages:
 
 | Automation | Trigger | Status |
 |---|---|---|
-| GOAT Lights — New Lead (Meta / Facebook) | New lead in Meta pipeline | OFF (turn on after review) |
-| GOAT Lights — New Lead (Yard Sign Branded) | New lead in Branded pipeline | OFF |
-| GOAT Lights — New Lead (Yard Sign Non-Branded) | New lead in Non-Branded pipeline | OFF |
-| GOAT Lights — Appt Booked Confirmation (×3, one per pipeline) | Lead moved to Appointment Booked | OFF |
+| GOAT Lights — New Lead (Meta / Facebook) | New lead in Meta pipeline | ON |
+| GOAT Lights — New Lead (Yard Sign Branded) | New lead in Branded pipeline | ON |
+| GOAT Lights — New Lead (Yard Sign Non-Branded) | New lead in Non-Branded pipeline | ON |
+| GOAT Lights — Appt Booked Confirmation (×3, one per pipeline) | Lead moved to Appointment Booked | ON |
 | Missed Call Text-Back (existing) | Missed call | ON (wording updated) |
 
 The existing window-cleaning automation "New Lead — META" only fires for the *Digiwerks Meta Leads* pipeline, so it won't double-text Christmas lights leads.
@@ -108,7 +108,7 @@ How each source gets into the right pipeline:
 
 ### Setting up option 3 (Quo → Flyra webhook)
 
-Two automations are already built in Flyra, both **OFF**:
+Two automations are already built in Flyra, both **ON** (they do nothing until Quo sends to them):
 - *Quo → Flyra: Yard Sign Branded leads*: creates the lead in the Branded pipeline
 - *Quo → Flyra: Yard Sign Non-Branded leads*: creates the lead in the Non-Branded pipeline
 
