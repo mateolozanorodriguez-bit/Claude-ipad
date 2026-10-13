@@ -106,6 +106,27 @@ How each source gets into the right pipeline:
   2. **Use your Flyra number on the yard signs** instead of the Quo number. Calls and texts then land straight in Flyra, and the missed-call text-back fires automatically. Using a different number for branded and non-branded signs lets you tell the two apart.
   3. **Automatic Quo → Flyra:** a Quo webhook (call or message received) feeds a Flyra *Inbound webhook* automation that creates the lead in the right pipeline. No monthly cost, but you need a separate Quo number per sign type to tell them apart, and the webhook URL has to be set up in Flyra and Quo. Check that your Quo plan includes webhooks/API.
 
+### Setting up option 3 (Quo → Flyra webhook)
+
+Two automations are already built in Flyra, both **OFF**:
+- *Quo → Flyra: Yard Sign Branded leads*: creates the lead in the Branded pipeline
+- *Quo → Flyra: Yard Sign Non-Branded leads*: creates the lead in the Non-Branded pipeline
+
+Steps:
+1. **Get one Quo number per sign type.** Print number A on branded signs and number B on non-branded signs. This is how Flyra tells the two apart.
+2. **Copy the webhook URL from Flyra.** Open each Quo → Flyra automation in the Flyra web app (*Automations*), click the trigger step, and copy its webhook URL.
+3. **Create the webhooks in Quo.** You need to be an Owner or Admin. In the Quo web or desktop app go to *Settings → Integrations → Webhooks*, and for each sign number create a webhook:
+   - URL: the matching Flyra webhook URL
+   - Events: `message.received` and `call.completed` (a completed call includes missed calls and voicemails)
+   - Phone number: only that sign's number
+4. **Test before trusting it.** Turn on the Quo → Flyra automation and text and call the sign number from your cell. Check that:
+   - one lead appears in the right pipeline, with the caller's phone number filled in
+   - texting a second time doesn't create a duplicate lead
+   - the New Lead text sequence starts
+5. If the phone number comes through blank, or every text creates a new lead, the payload isn't mapping cleanly. Use the fallback below.
+
+**Fallback:** use [Make.com](https://www.make.com) (free tier). Its scenario is *Quo webhook → search Flyra for the phone number → if not found, create the lead in the right pipeline* through the Flyra REST API. Create the API key at app.flyra.io/developer.
+
 > Note: Flyra's missed-call text-back only fires for calls to your **Flyra** number. Missed calls on Quo need Quo's own missed-call auto-reply. Paste the same missed-call text from section 2 into Quo so both numbers say the same thing.
 
 ## 5. Before turning it on
